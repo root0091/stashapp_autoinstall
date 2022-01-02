@@ -153,7 +153,7 @@ clear
 echo "Complete"
 echo "-----------------------------------------------------------------------"
 echo "Stash should be running with external IP access & scrapers installed."
-echo "ThePornDB autoscraper installed by default. Both instances set as 
+echo "ThePornDB autoscraper installed by default. Both instances set as"
 echo "services to autostart on boot."
 echo "-----------------------------------------------------------------------"
 read -n 1 -s -r -p "Press any key to continue"
