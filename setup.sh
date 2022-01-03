@@ -6,10 +6,8 @@ echo "Future Stash Install Password"
 read password
 echo "ThePornDB API Key"
 read apikey
-clear
 echo "Headless Chrome Install"
 echo "-----------------------------------------------------------------------"
-sleep 5
 export CHROME_BIN=/usr/bin/google-chrome
 export DISPLAY=:99.0
 apt install -y xvfb 
@@ -21,10 +19,8 @@ sudo dpkg -i google-chrome*.deb
 apt --fix-broken -y install
 cd /
 rm google-chrome*
-clear
 echo "Stash Install"
 echo "-----------------------------------------------------------------------"
-sleep 5
 mkdir /work
 cd /work
 wget https://github.com/stashapp/stash/releases/latest/download/stash-linux
@@ -134,17 +130,21 @@ echo "WantedBy=multi-user.target">> /etc/systemd/system/stashapp-autoscrape.serv
 chmod +x /etc/systemd/system/stashapp-autoscrape.service
 systemctl enable stashapp-autoscrape
 systemctl start stashapp
+sleep 5
 clear
 echo "Go to local IP listed below and select 'In the current working directory.'"
 echo "Access is set to http:// at port :9999"
 echo "----------------------------------------------------------------------------"
 ip addr | grep -Po 'inet \K[\d.]+'
+echo "----------------------------------------------------------------------------"
 echo "Feel free to add directory of media at this time."
 echo "----------------------------------------------------------------------------"
 echo "Do NOT change any settings, once you have reached the main page, continue."
 echo "----------------------------------------------------------------------------"
 read -n 1 -s -r -p "Press any key to continue"
 clear
+echo "Stash Config Modifications"
+echo "----------------------------------------------------------------------------"
 systemctl stop stashapp
 echo 'scraper_user_agent: ""'>>/work/config.yml
 echo 'scraper_cdp_path: ""'>>/work/config.yml
@@ -161,6 +161,7 @@ hashed=$(bcrypt-tool hash $password)
 echo 'password: '$hashed''>>/work/config.yml
 systemctl start stashapp
 systemctl start stashapp-autoscrape
+sleep 5
 clear
 echo "Complete"
 echo "-----------------------------------------------------------------------"
@@ -171,5 +172,11 @@ echo "-----------------------------------------------------------------------"
 echo "All scrapers have been added along with all plugins added. Plugins are"
 echo "located in /work/avail.plugins. To enable, set permissions and move to"
 echo "/work/plugins as directed in README.md"
-
+echo "-----------------------------------------------------------------------"
+echo "For proper function, the process is now available at "
+echo "http://localhost:443. This is to allow proper player function through"
+echo "reverse proxy if needed in ssl. Feel free to change port otherwise in"
+echo "/work/config.yml if needed."
+echo "-----------------------------------------------------------------------"
 read -n 1 -s -r -p "Press any key to continue"
+clear
