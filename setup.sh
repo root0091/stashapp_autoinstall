@@ -169,8 +169,8 @@ echo 'scraper_cdp_path: ""'>>/work/config.yml
 sed -i '/scraper_cdp_path: ""/c scraper_cdp_path: /usr/bin/google-chrome' /work/config.yml
 sed -i '/scraper_user_agent: ""/c scraper_user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36' /work/config.yml
 sed -i '/dangerous_allow_public_without_auth: "false"/c dangerous_allow_public_without_auth: "true"' /work/config.yml
-sed -i '/#- Key: Authorization # Uncomment and add a valid API Key after the `Bearer ` part/c - Key: Authorization' /work/scrapers/ThePornDB.yml
-sed -i '/#Value: Bearer zUotW1dT5ESmpIpMnccUNczf8q4C9Thzn07ZqygE/c Value: Bearer '$apikey'' /work/scrapers/ThePornDB.yml
+sed -i '/#- Key: Authorization # Uncomment and add a valid API Key after the `Bearer ` part/c    - Key: Authorization' /work/scrapers/ThePornDB.yml
+sed -i '/#Value: Bearer zUotW1dT5ESmpIpMnccUNczf8q4C9Thzn07ZqygE/c      Value: Bearer '$apikey'' /work/scrapers/ThePornDB.yml
 sed -i '/parallel_tasks: 1/c parallel_tasks: 0' /work/config.yml
 sed -i '/port: 9999/c port: 443' /work/config.yml
 echo 'username: '$username''>>/work/config.yml
