@@ -19,6 +19,8 @@ apt-get install -y python3 python3-pip python3-pil python3-requests unzip libapp
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
 apt --fix-broken -y install
+cd /
+rm google-chrome*
 clear
 echo "Stash Install"
 echo "-----------------------------------------------------------------------"
