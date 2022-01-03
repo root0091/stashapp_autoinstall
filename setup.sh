@@ -14,8 +14,8 @@ export CHROME_BIN=/usr/bin/google-chrome
 export DISPLAY=:99.0
 apt install -y xvfb 
 apt-get update
-apt-get install -y libappindicator1 fonts-liberation libasound2 libgconf-2-4 libnspr4 libxss1 libnss3 xdg-utils
-apt-get install -y python3 python3-pip python3-pil python3-requests
+apt-get -y upgrade
+apt-get install -y python3 python3-pip python3-pil python3-requests unzip libappindicator1 fonts-liberation libasound2 libgconf-2-4 libnspr4 libxss1 libnss3 xdg-utils
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
 apt --fix-broken -y install
@@ -40,10 +40,18 @@ echo "WantedBy=multi-user.target">> /etc/systemd/system/stashapp.service
 chmod +x /etc/systemd/system/stashapp.service
 systemctl enable stashapp
 mkdir /work/plugins
+mkdir /work/avail.plugins
+cd /work/avail.plugins
+wget https://github.com/stashapp/CommunityScripts/archive/refs/heads/main.zip
+unzip ./*
+cd ./C*
+mv ./* ../
+cd ../
+rm main.zip
+rm -rf Community*
 mkdir /work/scrapers
 cd /work/scrapers
 wget https://github.com/stashapp/CommunityScrapers/archive/refs/heads/master.zip
-apt install unzip
 unzip ./*
 cd ./C*
 cd ./s*
@@ -143,6 +151,7 @@ sed -i '/scraper_user_agent: ""/c scraper_user_agent: Mozilla/5.0 (Windows NT 10
 sed -i '/dangerous_allow_public_without_auth: "false"/c dangerous_allow_public_without_auth: "true"' /work/config.yml
 sed -i '/#- Key: Authorization # Uncomment and add a valid API Key after the `Bearer ` part/c - Key: Authorization' /work/scrapers/ThePornDB.yml
 sed -i '/#Value: Bearer zUotW1dT5ESmpIpMnccUNczf8q4C9Thzn07ZqygE/c Value: Bearer '$apikey'' /work/scrapers/ThePornDB.yml
+sed -i '/parallel_tasks: 1/c parallel_tasks: 0' /work/config.yml
 echo 'username: '$username''>>/work/config.yml
 snap install bcrypt-tool
 hashed=$(bcrypt-tool hash $password)
@@ -156,4 +165,8 @@ echo "Stash should be running with external IP access & scrapers installed."
 echo "ThePornDB autoscraper installed by default. Both instances set as"
 echo "services to autostart on boot."
 echo "-----------------------------------------------------------------------"
+echo "All scrapers have been added along with all plugins added. Plugins are"
+echo "located in /work/avail.plugins. To enable, set permissions and move to"
+echo "/work/plugins as directed in README.md"
+
 read -n 1 -s -r -p "Press any key to continue"
