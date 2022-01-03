@@ -136,7 +136,7 @@ clear
 echo "Go to local IP listed below and select 'In the current working directory.'"
 echo "Access is set to http:// at port :9999"
 echo "----------------------------------------------------------------------------"
-ip addr | grep -Po 'inet \K[\d.]+'^C
+ip addr | grep -Po 'inet \K[\d.]+'
 echo "Feel free to add directory of media at this time."
 echo "----------------------------------------------------------------------------"
 echo "Do NOT change any settings, once you have reached the main page, continue."
