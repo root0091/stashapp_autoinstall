@@ -152,6 +152,7 @@ sed -i '/dangerous_allow_public_without_auth: "false"/c dangerous_allow_public_w
 sed -i '/#- Key: Authorization # Uncomment and add a valid API Key after the `Bearer ` part/c - Key: Authorization' /work/scrapers/ThePornDB.yml
 sed -i '/#Value: Bearer zUotW1dT5ESmpIpMnccUNczf8q4C9Thzn07ZqygE/c Value: Bearer '$apikey'' /work/scrapers/ThePornDB.yml
 sed -i '/parallel_tasks: 1/c parallel_tasks: 0' /work/config.yml
+sed -i '/port: 9999/c port:443' /work/config.yml
 echo 'username: '$username''>>/work/config.yml
 snap install bcrypt-tool
 hashed=$(bcrypt-tool hash $password)
